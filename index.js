@@ -116,7 +116,12 @@ export const getPayloadForToken: (Props & { code: string }) => string = ({
   })
 
 export const injectedJavaScript = () =>
-  'document.querySelector("input[type=text]").setAttribute("autocapitalize", "off")'
+  `document.querySelector("input[type=text]").setAttribute("autocapitalize", "off");
+  setTimeout(() => {
+    document.querySelector('.login__form').setAttribute("tabindex", "1")
+    document.querySelector('.login__form').focus();
+  }, 0);
+`
 
 export const fetchToken: string => Promise<LinkedInToken> = async payload => {
   const response = await fetch(ACCESS_TOKEN_URL, {
